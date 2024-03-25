@@ -1,17 +1,21 @@
 .dish-item-container {
-  border: 1px solid gray;
   border-radius: 12px;
   justify-content: space-between;
   display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(17, 17, 17, 0.328);
 }
 
 .veg-border {
   border: 1px solid #00923f;
   align-self: flex-start;
+  margin-top: 4px;
 }
 
 .non-veg-border {
   border: 1px solid #92282a;
+  margin-top: 4px;
 }
 
 .veg-round {
@@ -28,6 +32,7 @@
 
 .dish-details-container {
   flex-grow: 1;
+  margin-left: 5px;
 }
 
 .dish-name {
@@ -47,7 +52,7 @@
 }
 
 .dish-description {
-  color: #bfc3c7;
+  color: #303336;
   font-weight: 500;
   font-family: 'Roboto';
   font-size: 16px;
@@ -57,10 +62,12 @@
 
 .controller-container {
   width: fit-content;
-  min-width: 150px;
+  height: 33px;
+  min-width: 120px;
   justify-content: space-between;
   background-color: #00923f;
   display: flex;
+  align-items: center;
   padding: 10px;
   border-radius: 50px;
 }
@@ -73,7 +80,7 @@
   cursor: pointer;
   color: #fff;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .quantity {
@@ -105,8 +112,18 @@
 }
 
 .dish-image {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 12px;
   align-self: flex-start;
+}
+.add-to-cart {
+  padding: 5px;
+  background-color: rgb(145, 240, 145);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  font-size: 22px;
 }

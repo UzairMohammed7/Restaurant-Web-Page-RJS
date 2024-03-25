@@ -1,9 +1,11 @@
+import {useState, useContext} from 'react'
+
+import CartContext from '../Context/CartContext'
+
 import './index.css'
 
-const DishItem = props => {
-  const {dishDetails, cartItems, addItemToCart, removeItemFromCart} = props
+const DishItem = ({dishDetails}) => {
   const {
-    dishId,
     dishName,
     dishType,
     dishPrice,
@@ -15,20 +17,22 @@ const DishItem = props => {
     dishAvailability,
   } = dishDetails
 
-  const onIncreaseQuantity = () => addItemToCart(dishDetails)
-  const onDecreaseQuantity = () => removeItemFromCart(dishDetails)
+  const [quantity, setQuantity] = useState(0)
+  const {addCartItem} = useContext(CartContext)
 
-  const getQuantity = () => {
-    const cartItem = cartItems.find(item => item.dishId === dishId)
-    return cartItem ? cartItem.quantity : 0
-  }
+  const onIncreaseQuantity = () => setQuantity(prevState => prevState + 1)
+
+  const onDecreaseQuantity = () =>
+    setQuantity(prevState => (prevState > 0 ? prevState - 1 : 0))
+
+  const onAddItemToCart = () => addCartItem({...dishDetails, quantity})
 
   const renderControllerButton = () => (
-    <div className="controller-container d-flex align-items-center bg-success">
+    <div className="controller-container">
       <button className="button" type="button" onClick={onDecreaseQuantity}>
         -
       </button>
-      <p className="quantity">{getQuantity()}</p>
+      <p className="quantity">{quantity}</p>
       <button className="button" type="button" onClick={onIncreaseQuantity}>
         +
       </button>
@@ -36,7 +40,7 @@ const DishItem = props => {
   )
 
   return (
-    <li className="mb-3 p-3 dish-item-container d-flex">
+    <li className="dish-item-container">
       <div
         className={`veg-border ${dishType === 1 ? 'non-veg-border' : ''} me-3`}
       >
@@ -55,9 +59,18 @@ const DishItem = props => {
         {addonCat.length !== 0 && (
           <p className="addon-availability-text">Customizations available</p>
         )}
+        {quantity > 0 && (
+          <button
+            type="button"
+            className="add-to-cart btn btn-outline-primary mt-3"
+            onClick={onAddItemToCart}
+          >
+            ADD TO CART
+          </button>
+        )}
       </div>
 
-      <p className="dish-calories text-warning">{dishCalories} calories</p>
+      <p className="dish-calories">{dishCalories} calories</p>
       <img className="dish-image" alt={dishName} src={dishImage} />
     </li>
   )
